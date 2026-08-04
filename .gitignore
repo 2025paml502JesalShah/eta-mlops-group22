@@ -25,3 +25,5 @@ Thumbs.db
 # Datasets
 data/raw/*.csv
 data/processed/*.csv
+
+reports/pipeline.log

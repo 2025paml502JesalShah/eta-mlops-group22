@@ -1,0 +1,39 @@
+============================================================
+NYC TAXI DATA CLEANING REPORT
+============================================================
+
+Transformations Applied
+------------------------------------------------------------
+✓ Converted pickup_datetime to datetime
+✓ Converted dropoff_datetime to datetime
+✓ Removed duplicate rows
+✓ Removed rows with missing values
+✓ Filtered passenger_count between 1 and 6
+✓ Validated latitude range (-90 to 90)
+✓ Validated longitude range (-180 to 180)
+
+Cleaning Statistics
+------------------------------------------------------------
+Dataset Information
+------------------------------------------------------------
+Dataset : NYC Taxi Trip Duration
+Source  : Kaggle
+
+Initial Rows               : 1458644
+Duplicate Rows Removed     : 0
+Rows Removed (Missing)     : 0
+Rows Removed (Passenger)   : 65
+Rows Removed (Latitude)    : 0
+Rows Removed (Longitude)   : 0
+
+Final Rows                 : 1458579
+Total Rows Removed         : 65
+
+Processed Dataset
+------------------------------------------------------------
+data\processed\NYC_clean.csv
+
+
+============================================================
+Cleaning Completed Successfully.
+============================================================

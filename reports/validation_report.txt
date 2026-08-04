@@ -1,0 +1,31 @@
+==================================================
+NYC TAXI DATA VALIDATION REPORT
+==================================================
+
+Rows                : 1458644
+Columns             : 11
+
+Missing Values
+--------------------------------------------------
+id                    0
+vendor_id             0
+pickup_datetime       0
+dropoff_datetime      0
+passenger_count       0
+pickup_longitude      0
+pickup_latitude       0
+dropoff_longitude     0
+dropoff_latitude      0
+store_and_fwd_flag    0
+trip_duration         0
+
+Duplicate Rows      : 0
+Duplicate IDs       : 0
+
+Validation Checks
+--------------------------------------------------
+Invalid Passenger Count : 65
+Invalid Pickup Latitude : 0
+Invalid Dropoff Latitude: 0
+Invalid Pickup Longitude: 0
+Invalid Dropoff Longitude: 0

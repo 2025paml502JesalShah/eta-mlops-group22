@@ -1,5 +1,12 @@
 dataset:
-  path: data/raw/NYC.csv
+  raw_data_path: data/raw/NYC.csv
+  processed_data_path: data/processed/NYC_clean.csv
 
-model:
-  random_state: 42
+validation:
+  report_path: reports/validation_report.txt
+
+cleaning:
+  report_path: reports/cleaning_report.txt
+  
+logging:
+  log_path: reports/pipeline.log
