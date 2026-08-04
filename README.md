@@ -10,8 +10,8 @@ This project implements an end-to-end Machine Learning Operations (MLOps) workfl
 
 | Student ID | Name |
 |------------|------|
-| 2025PAML502 | Jesal Shah |
 | 2025PAML589 | Sunidhi Sharma |
+| 2025PAML502 | Jesal Shah |
 | 2025PAML609 | Saakshi Arora |
 
 ---
