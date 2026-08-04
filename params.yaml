@@ -1,0 +1,5 @@
+dataset:
+  path: data/raw/NYC.csv
+
+model:
+  random_state: 42
