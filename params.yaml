@@ -10,3 +10,7 @@ cleaning:
   
 logging:
   log_path: reports/pipeline.log
+
+features:
+  n_clusters: 100
+  random_state: 42

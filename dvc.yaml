@@ -1,0 +1,10 @@
+stages:
+  build_features:
+    cmd: python src/features/build_features.py
+    deps:
+    - data/processed/NYC_clean.csv
+    - src/features/build_features.py
+    params:
+    - features.n_clusters
+    outs:
+    - data/features/nyc_features.csv

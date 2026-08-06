@@ -1,0 +1,21 @@
+schema: '2.0'
+stages:
+  build_features:
+    cmd: python src/features/build_features.py
+    deps:
+    - path: data/processed/NYC_clean.csv
+      hash: md5
+      md5: 9fa4d99d56c159495d140d2c01dfd7c3
+      size: 196995955
+    - path: src/features/build_features.py
+      hash: md5
+      md5: 4c2595c333b96b89b34f86ef45a3f883
+      size: 3834
+    params:
+      params.yaml:
+        features.n_clusters: 100
+    outs:
+    - path: data/features/nyc_features.csv
+      hash: md5
+      md5: 1e3897db73aeb1b92000efe6ac82cc3f
+      size: 391028481
