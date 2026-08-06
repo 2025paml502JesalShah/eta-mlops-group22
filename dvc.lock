@@ -9,13 +9,13 @@ stages:
       size: 196995955
     - path: src/features/build_features.py
       hash: md5
-      md5: 4c2595c333b96b89b34f86ef45a3f883
-      size: 3834
+      md5: 3ca99777b475d556a3acd02ee0406aa1
+      size: 4292
     params:
       params.yaml:
         features.n_clusters: 100
     outs:
     - path: data/features/nyc_features.csv
       hash: md5
-      md5: 1e3897db73aeb1b92000efe6ac82cc3f
-      size: 391028481
+      md5: c8e123697e944d2e6e2e453850eaccb6
+      size: 389278943

@@ -30,6 +30,17 @@ def add_time_features(df):
     df['is_holiday'] = df['pickup_datetime'].dt.date.astype('datetime64[ns]').isin(us_hol).astype(int)
     return df
 
+def filter_nyc_bounds(df):
+    before = len(df)
+    df = df[
+        df['pickup_longitude'].between(-74.05, -73.7) &
+        df['pickup_latitude'].between(40.6, 40.9) &
+        df['dropoff_longitude'].between(-74.05, -73.7) &
+        df['dropoff_latitude'].between(40.6, 40.9)
+    ].copy()
+    print(f"Dropped {before - len(df)} rows outside NYC bounding box ({100*(before-len(df))/before:.3f}%)")
+    return df
+
 def haversine(lat1, lon1, lat2, lon2):
     lat1, lon1, lat2, lon2 = map(np.radians, [lat1, lon1, lat2, lon2])
     dlat, dlon = lat2 - lat1, lon2 - lon1
@@ -73,6 +84,8 @@ def main():
     output_dir.mkdir(parents=True, exist_ok=True)
 
     df = pd.read_csv(input_path, parse_dates=['pickup_datetime', 'dropoff_datetime'])
+
+    df = filter_nyc_bounds(df)
 
     df = add_time_features(df)
     df = add_distance_features(df)
