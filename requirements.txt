@@ -6,4 +6,4 @@ seaborn
 jupyter
 dvc
 pyyaml
-holidays
+holidays==0.102

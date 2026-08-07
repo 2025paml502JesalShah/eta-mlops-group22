@@ -17,5 +17,5 @@ stages:
     outs:
     - path: data/features/nyc_features.csv
       hash: md5
-      md5: c8e123697e944d2e6e2e453850eaccb6
-      size: 389278943
+      md5: da3bfc32b4b983407c6efa844feb0176
+      size: 389268802
