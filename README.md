@@ -151,6 +151,17 @@ data/features/nyc_features.csv
 
 ## Current Project Status
 
+**The important part is the extra ` ``` ` after `nyc_features.csv`.**
+
+Then **save `README.md`**.
+
+Do **not** commit or push yet.
+
+Now run only:
+
+```powershell
+git diff -- README.md
+
 - Git repository configured
 - GitHub repository connected
 - DVC configured with Google Drive remote
