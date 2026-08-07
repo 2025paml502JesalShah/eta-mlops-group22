@@ -134,6 +134,15 @@ dvc pull
 
 ---
 
+## Feature Engineering
+
+The project includes a reproducible feature-engineering pipeline that transforms the cleaned NYC taxi dataset into a model-ready feature dataset.
+
+### Input
+
+```text
+data/processed/NYC_clean.csv
+
 ## Current Project Status
 
 - Git repository configured
