@@ -1,0 +1,39 @@
+FEATURE ENGINEERING REPORT
+==========================
+
+Input dataset:
+data/processed/NYC_clean.csv
+
+Output dataset:
+data/features/nyc_features.csv
+
+Rows:
+14,523,224
+
+Columns:
+28
+
+Feature groups:
+- Time-based features
+- Rush-hour indicators
+- Weekend indicator
+- Cyclic hour encoding
+- Cyclic day-of-week encoding
+- Holiday indicator
+- Haversine distance
+- Manhattan distance
+- Bearing
+- Pickup location clusters
+- Dropoff location clusters
+
+Feature engineering script:
+src/features/build_features.py
+
+DVC pipeline:
+dvc.yaml
+
+DVC lock file:
+dvc.lock
+
+Pipeline command:
+dvc repro
