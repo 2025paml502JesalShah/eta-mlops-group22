@@ -7,3 +7,4 @@ jupyter
 dvc
 pyyaml
 holidays==0.102
+lightgbm
