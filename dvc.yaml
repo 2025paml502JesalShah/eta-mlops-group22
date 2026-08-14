@@ -6,8 +6,10 @@ stages:
       - src/features/build_features.py
     params:
       - features.n_clusters
+      - features.random_state
     outs:
       - data/features/nyc_features.csv
+      - models/location_kmeans.pkl
 
   train_model:
     cmd: python src/models/train_model.py

@@ -27,3 +27,7 @@ data/raw/*.csv
 data/processed/*.csv
 
 reports/pipeline.log
+
+# MLflow local tracking
+mlflow.db
+mlruns/

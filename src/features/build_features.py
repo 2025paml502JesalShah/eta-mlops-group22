@@ -64,15 +64,40 @@ def add_distance_features(df):
     ))
     return df
 
-def add_location_clusters(df, n_clusters=100, random_state=42):
+def add_location_clusters(
+    df,
+    n_clusters=100,
+    random_state=42,
+    model_path="models/location_kmeans.pkl"
+):
     coords = np.vstack([
         df[['pickup_latitude', 'pickup_longitude']].values,
         df[['dropoff_latitude', 'dropoff_longitude']].values
     ])
-    kmeans = MiniBatchKMeans(n_clusters=n_clusters, random_state=random_state,
-                              n_init=10, batch_size=10000).fit(coords)
-    df['pickup_cluster'] = kmeans.predict(df[['pickup_latitude', 'pickup_longitude']])
-    df['dropoff_cluster'] = kmeans.predict(df[['dropoff_latitude', 'dropoff_longitude']])
+
+    kmeans = MiniBatchKMeans(
+        n_clusters=n_clusters,
+        random_state=random_state,
+        n_init=10,
+        batch_size=10000
+    ).fit(coords)
+
+    df['pickup_cluster'] = kmeans.predict(
+        df[['pickup_latitude', 'pickup_longitude']]
+    )
+
+    df['dropoff_cluster'] = kmeans.predict(
+        df[['dropoff_latitude', 'dropoff_longitude']]
+    )
+
+    model_path = Path(model_path)
+    model_path.parent.mkdir(parents=True, exist_ok=True)
+
+    import joblib
+    joblib.dump(kmeans, model_path)
+
+    print(f"Saved location KMeans model to {model_path}")
+
     return df, kmeans
 
 def main():
@@ -89,7 +114,11 @@ def main():
 
     df = add_time_features(df)
     df = add_distance_features(df)
-    df, kmeans_model = add_location_clusters(df, n_clusters=fe_params.get('n_clusters', 100))
+    df, kmeans_model = add_location_clusters(
+    df,
+    n_clusters=fe_params.get('n_clusters', 100),
+    random_state=fe_params.get('random_state', 42)
+)
 
     # Drop leakage-prone / raw columns not needed downstream
     df = df.drop(columns=['dropoff_datetime'])
