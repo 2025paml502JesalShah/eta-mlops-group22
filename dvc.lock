@@ -9,22 +9,27 @@ stages:
       size: 196995955
     - path: src/features/build_features.py
       hash: md5
-      md5: 3ca99777b475d556a3acd02ee0406aa1
-      size: 4292
+      md5: 0dcf59cb5658842dcf7d1007b4c6a843
+      size: 4688
     params:
       params.yaml:
         features.n_clusters: 100
+        features.random_state: 42
     outs:
     - path: data/features/nyc_features.csv
       hash: md5
-      md5: da3bfc32b4b983407c6efa844feb0176
+      md5: dcf61bcd149815eeece650c05e663746
       size: 389268802
+    - path: models/location_kmeans.pkl
+      hash: md5
+      md5: 9aa5ada258c939e8c06d590573f16603
+      size: 11621947
   train_model:
     cmd: python src/models/train_model.py
     deps:
     - path: data/features/nyc_features.csv
       hash: md5
-      md5: da3bfc32b4b983407c6efa844feb0176
+      md5: dcf61bcd149815eeece650c05e663746
       size: 389268802
     - path: src/models/train_model.py
       hash: md5
@@ -40,13 +45,13 @@ stages:
     outs:
     - path: models/best_model.pkl
       hash: md5
-      md5: d38588fde5297370d6b382edc5aa5d36
-      size: 144469825
+      md5: 7feb0a24cf7551fc57a276d0ee16ce41
+      size: 143709361
     - path: reports/model_comparison.csv
       hash: md5
-      md5: ad5ed0d73098e58305a242342c65d520
-      size: 249
+      md5: 92df7d52d308c95f482e498f1f661a9e
+      size: 251
     - path: reports/normal_trip_model_comparison.csv
       hash: md5
-      md5: aad5fb5f294692a9c0f13273d4b38561
+      md5: 000c31ea99195102f583949cd7c9f067
       size: 211
