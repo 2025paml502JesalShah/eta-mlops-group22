@@ -19,3 +19,34 @@ stages:
       hash: md5
       md5: da3bfc32b4b983407c6efa844feb0176
       size: 389268802
+  train_model:
+    cmd: python src/models/train_model.py
+    deps:
+    - path: data/features/nyc_features.csv
+      hash: md5
+      md5: da3bfc32b4b983407c6efa844feb0176
+      size: 389268802
+    - path: src/models/train_model.py
+      hash: md5
+      md5: 7bafa1c1250f5c8a71195f4aff1d5bc6
+      size: 13589
+    params:
+      params.yaml:
+        model.max_depth: 15
+        model.n_estimators: 50
+        model.outlier_threshold_seconds: 21600
+        model.random_state: 42
+        model.test_size: 0.2
+    outs:
+    - path: models/best_model.pkl
+      hash: md5
+      md5: d38588fde5297370d6b382edc5aa5d36
+      size: 144469825
+    - path: reports/model_comparison.csv
+      hash: md5
+      md5: ad5ed0d73098e58305a242342c65d520
+      size: 249
+    - path: reports/normal_trip_model_comparison.csv
+      hash: md5
+      md5: aad5fb5f294692a9c0f13273d4b38561
+      size: 211
