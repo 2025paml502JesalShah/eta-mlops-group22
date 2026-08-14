@@ -1,6 +1,6 @@
 pandas
 numpy
-scikit-learn
+scikit-learn==1.8.0
 matplotlib
 seaborn
 jupyter
@@ -9,3 +9,5 @@ pyyaml
 holidays==0.102
 lightgbm
 mlflow==3.15.1
+fastapi
+uvicorn
