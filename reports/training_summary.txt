@@ -1,0 +1,32 @@
+ETA Prediction Model Training Summary
+==================================================
+
+Model parameters
+------------------------------
+Outlier threshold: 21600 seconds (6.0 hours)
+Test size: 0.2
+Random state: 42
+Number of trees: 50
+Max depth: 15
+
+Outlier treatment
+------------------------------
+Original training rows: 1,161,859
+Filtered training rows: 1,160,222
+Removed rows: 1,637
+Removal percentage: 0.1409%
+
+Model comparison
+------------------------------
+                 Model        MAE        RMSE        R2
+Random Forest Baseline 394.027486 3156.029017  0.004269
+Random Forest Filtered 304.357429 3110.234160  0.032956
+              LightGBM 406.297908 3260.860913 -0.062979
+
+Normal-trip evaluation
+------------------------------
+                                Model        MAE      RMSE       R2
+Random Forest Baseline - Normal Trips 280.050071 651.61376 0.005620
+Random Forest Filtered - Normal Trips 189.998571 308.53313 0.777066
+
+Best model by MAE: Random Forest Filtered

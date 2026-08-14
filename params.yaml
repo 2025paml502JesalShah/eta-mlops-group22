@@ -14,3 +14,10 @@ logging:
 features:
   n_clusters: 100
   random_state: 42
+
+model:
+  test_size: 0.2
+  random_state: 42
+  outlier_threshold_seconds: 21600
+  n_estimators: 50
+  max_depth: 15

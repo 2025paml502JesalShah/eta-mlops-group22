@@ -2,9 +2,26 @@ stages:
   build_features:
     cmd: python src/features/build_features.py
     deps:
-    - data/processed/NYC_clean.csv
-    - src/features/build_features.py
+      - data/processed/NYC_clean.csv
+      - src/features/build_features.py
     params:
-    - features.n_clusters
+      - features.n_clusters
     outs:
-    - data/features/nyc_features.csv
+      - data/features/nyc_features.csv
+
+  train_model:
+    cmd: python src/models/train_model.py
+    deps:
+      - data/features/nyc_features.csv
+      - src/models/train_model.py
+    params:
+      - model.test_size
+      - model.random_state
+      - model.outlier_threshold_seconds
+      - model.n_estimators
+      - model.max_depth
+    outs:
+      - models/best_model.pkl
+    metrics:
+      - reports/model_comparison.csv
+      - reports/normal_trip_model_comparison.csv
