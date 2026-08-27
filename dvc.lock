@@ -33,8 +33,8 @@ stages:
       size: 389268802
     - path: src/models/train_model.py
       hash: md5
-      md5: 7bafa1c1250f5c8a71195f4aff1d5bc6
-      size: 13589
+      md5: f799fc2032a6871f5fa60c0776f398e8
+      size: 15758
     params:
       params.yaml:
         model.max_depth: 15
@@ -49,9 +49,9 @@ stages:
       size: 143709361
     - path: reports/model_comparison.csv
       hash: md5
-      md5: 92df7d52d308c95f482e498f1f661a9e
-      size: 251
+      md5: de56e22366e4e995d974b18f026e5d8a
+      size: 252
     - path: reports/normal_trip_model_comparison.csv
       hash: md5
-      md5: 000c31ea99195102f583949cd7c9f067
-      size: 211
+      md5: 7654711cf967e35571267bd633330332
+      size: 210

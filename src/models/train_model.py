@@ -24,6 +24,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import yaml
+import mlflow
+import mlflow.sklearn
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
@@ -47,6 +49,14 @@ OUTLIER_THRESHOLD = model_params.get(
 )
 N_ESTIMATORS = model_params.get("n_estimators", 50)
 MAX_DEPTH = model_params.get("max_depth", 15)
+
+# ---------------------------------------------------------------------------
+# MLflow configuration
+# ---------------------------------------------------------------------------
+
+mlflow.set_tracking_uri("http://127.0.0.1:5000")
+
+mlflow.set_experiment("NYC Taxi ETA")
 
 print("Model parameters:")
 print(f"  Outlier threshold: {OUTLIER_THRESHOLD:,} seconds")
@@ -178,15 +188,38 @@ rf_baseline = RandomForestRegressor(
     n_jobs=-1
 )
 
-rf_baseline.fit(X_train, y_train)
+with mlflow.start_run(run_name="Random Forest Baseline"):
 
-y_pred_rf_baseline = rf_baseline.predict(X_test)
+    rf_baseline.fit(X_train, y_train)
 
-baseline_results = evaluate_model(
-    "Random Forest Baseline",
-    y_test,
-    y_pred_rf_baseline
-)
+    y_pred_rf_baseline = rf_baseline.predict(X_test)
+
+    baseline_results = evaluate_model(
+        "Random Forest Baseline",
+        y_test,
+        y_pred_rf_baseline
+    )
+
+    mlflow.log_params({
+        "model": "RandomForestRegressor",
+        "n_estimators": N_ESTIMATORS,
+        "max_depth": MAX_DEPTH,
+        "random_state": RANDOM_STATE,
+        "test_size": TEST_SIZE,
+        "outlier_threshold": OUTLIER_THRESHOLD,
+        "training_rows": len(X_train),
+    })
+
+    mlflow.log_metrics({
+        "MAE": baseline_results["MAE"],
+        "RMSE": baseline_results["RMSE"],
+        "R2": baseline_results["R2"],
+    })
+
+    mlflow.sklearn.log_model(
+        rf_baseline,
+        "model"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -220,18 +253,43 @@ rf_filtered = RandomForestRegressor(
     n_jobs=-1
 )
 
-rf_filtered.fit(
-    X_train_filtered,
-    y_train_filtered
-)
+with mlflow.start_run(run_name="Random Forest Filtered"):
 
-y_pred_rf_filtered = rf_filtered.predict(X_test)
+    rf_filtered.fit(
+        X_train_filtered,
+        y_train_filtered
+    )
 
-filtered_results = evaluate_model(
-    "Random Forest Filtered",
-    y_test,
-    y_pred_rf_filtered
-)
+    y_pred_rf_filtered = rf_filtered.predict(X_test)
+
+    filtered_results = evaluate_model(
+        "Random Forest Filtered",
+        y_test,
+        y_pred_rf_filtered
+    )
+
+    mlflow.log_params({
+        "model": "RandomForestRegressor",
+        "n_estimators": N_ESTIMATORS,
+        "max_depth": MAX_DEPTH,
+        "random_state": RANDOM_STATE,
+        "test_size": TEST_SIZE,
+        "outlier_threshold": OUTLIER_THRESHOLD,
+        "training_rows": len(X_train_filtered),
+        "removed_rows": removed_rows,
+        "removed_percentage": removed_pct,
+    })
+
+    mlflow.log_metrics({
+        "MAE": filtered_results["MAE"],
+        "RMSE": filtered_results["RMSE"],
+        "R2": filtered_results["R2"],
+    })
+
+    mlflow.sklearn.log_model(
+        rf_filtered,
+        "model"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -275,15 +333,35 @@ lgb_model = lgb.LGBMRegressor(
     n_jobs=-1
 )
 
-lgb_model.fit(X_train, y_train)
+with mlflow.start_run(run_name="LightGBM"):
 
-y_pred_lgb = lgb_model.predict(X_test)
+    lgb_model.fit(X_train, y_train)
 
-lgb_results = evaluate_model(
-    "LightGBM",
-    y_test,
-    y_pred_lgb
-)
+    y_pred_lgb = lgb_model.predict(X_test)
+
+    lgb_results = evaluate_model(
+        "LightGBM",
+        y_test,
+        y_pred_lgb
+    )
+
+    mlflow.log_params({
+        "model": "LightGBM",
+        "random_state": RANDOM_STATE,
+        "test_size": TEST_SIZE,
+        "training_rows": len(X_train),
+    })
+
+    mlflow.log_metrics({
+        "MAE": lgb_results["MAE"],
+        "RMSE": lgb_results["RMSE"],
+        "R2": lgb_results["R2"],
+    })
+
+    mlflow.lightgbm.log_model(
+        lgb_model,
+        "model"
+    )
 
 
 # ---------------------------------------------------------------------------

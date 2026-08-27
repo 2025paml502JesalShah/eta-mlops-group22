@@ -1,0 +1,29 @@
+NYC TAXI ETA - MODEL MONITORING REPORT
+============================================================
+
+PREDICTION PERFORMANCE
+------------------------------------------------------------
+Predictions monitored: 1,000
+MAE: 441.44 seconds
+RMSE: 4663.03 seconds
+MAE threshold: 600.00 seconds
+
+Performance status: ACCEPTABLE
+
+DRIFT MONITORING
+------------------------------------------------------------
+Drift status: SIGNIFICANT DRIFT DETECTED
+
+RETRAINING TRIGGER
+------------------------------------------------------------
+Trigger conditions:
+1. MAE > 600 seconds
+2. Any monitored feature PSI > 0.25
+
+DECISION: RETRAINING REQUIRED
+Reason: Model performance or feature drift exceeded the operational threshold.
+
+RETRAINING DESIGN
+------------------------------------------------------------
+When the retraining trigger fires, the DVC pipeline should be executed to regenerate features and retrain the model.
+The resulting model should then be evaluated against the existing model before deployment.

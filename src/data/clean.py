@@ -53,7 +53,16 @@ def clean_data():
         (df["passenger_count"] >= 1) &
         (df["passenger_count"] <= 6)
     ]
-    passenger_removed = rows_before - len(df)
+    passenger_removed = rows_before - len(df) 
+    # -----------------------------
+    # Remove implausible trip durations
+    # -----------------------------
+    rows_before = len(df)
+    df = df[
+        (df["trip_duration"] >= 60) &
+        (df["trip_duration"] <= 7200)
+   ]
+   duration_removed = rows_before - len(df)
 
     # -----------------------------
     # Remove invalid latitude values
@@ -106,6 +115,7 @@ def clean_data():
     logger.info("✓ Removed duplicate rows")
     logger.info("✓ Removed rows with missing values")
     logger.info("✓ Filtered passenger_count between 1 and 6")
+    logger.info("✓ Filtered trip_duration between 60 and 7200 seconds")
     logger.info("✓ Validated latitude range (-90 to 90)")
     logger.info("✓ Validated longitude range (-180 to 180)")
 
@@ -117,6 +127,7 @@ def clean_data():
     logger.info(f"Duplicate Rows Removed     : {duplicate_rows}")
     logger.info(f"Rows Removed (Missing)     : {missing_removed}")
     logger.info(f"Rows Removed (Passenger)   : {passenger_removed}")
+    logger.info(f"Rows Removed (Duration)    : {duration_removed}")
     logger.info(f"Rows Removed (Latitude)    : {latitude_removed}")
     logger.info(f"Rows Removed (Longitude)   : {longitude_removed}")
     logger.info(f"Final Rows                 : {final_rows}")
@@ -146,6 +157,7 @@ def clean_data():
         report.write("✓ Removed duplicate rows\n")
         report.write("✓ Removed rows with missing values\n")
         report.write("✓ Filtered passenger_count between 1 and 6\n")
+        report.write("✓ Filtered trip_duration between 60 and 7200 seconds\n")
         report.write("✓ Validated latitude range (-90 to 90)\n")
         report.write("✓ Validated longitude range (-180 to 180)\n\n")
 
@@ -161,6 +173,7 @@ def clean_data():
         report.write(f"Duplicate Rows Removed     : {duplicate_rows}\n")
         report.write(f"Rows Removed (Missing)     : {missing_removed}\n")
         report.write(f"Rows Removed (Passenger)   : {passenger_removed}\n")
+        report.write(f"Rows Removed (Duration)    : {duration_removed}\n")
         report.write(f"Rows Removed (Latitude)    : {latitude_removed}\n")
         report.write(f"Rows Removed (Longitude)   : {longitude_removed}\n")
         report.write(f"\nFinal Rows                 : {final_rows}\n")

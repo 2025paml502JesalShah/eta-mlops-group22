@@ -1,0 +1,27 @@
+NYC TAXI ETA - DRIFT MONITORING REPORT
+=======================================================
+
+Baseline rows: 5,000
+Simulated current rows: 5,000
+
+PSI THRESHOLDS
+-------------------------------------------------------
+< 0.10       : No significant drift
+0.10 - 0.25  : Moderate drift
+> 0.25       : Significant drift
+
+FEATURE RESULTS
+-------------------------------------------------------
+haversine_km         PSI=0.0614 NO DRIFT
+passenger_count      PSI=0.0607 NO DRIFT
+hour                 PSI=0.2522 SIGNIFICANT DRIFT
+day_of_week          PSI=0.0018 NO DRIFT
+
+RETRAINING DECISION
+-------------------------------------------------------
+RETRAINING REQUIRED: Significant feature drift detected.
+
+DRIFT SIMULATION
+-------------------------------------------------------
+The simulated production data represents a change in NYC traffic conditions.
+The simulation increases trip distances and rush-hour activity.

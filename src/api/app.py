@@ -4,6 +4,7 @@ from pathlib import Path
 import joblib
 import numpy as np
 import pandas as pd
+import holidays
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -223,7 +224,9 @@ def create_features(request: TripRequest):
                 "hour_cos": hour_cos,
                 "dow_sin": dow_sin,
                 "dow_cos": dow_cos,
-                "is_holiday": 0,
+                "is_holiday": int(
+                    dt.date() in holidays.US(years=[dt.year])
+                ),
                 "haversine_km": haversine_km,
                 "manhattan_km": manhattan_km,
                 "bearing": bearing,

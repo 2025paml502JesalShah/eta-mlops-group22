@@ -1,0 +1,16 @@
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.git
+.github
+.dvc
+mlruns
+notebooks
+tests
+*.ipynb
+data
+reports
+scripts
+mlflow.db
+Group_project.ipynb
