@@ -17,7 +17,7 @@ venv/
 .dvc/cache/
 
 # Models
-models/*.pkl
+# Model files are tracked using Git LFS
 
 # OS files
 .DS_Store
